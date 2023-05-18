@@ -1,4 +1,4 @@
-package tn.esprit.configuration;
+package com.telcotec.eagleye.configuration;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
@@ -20,7 +20,7 @@ public class LoggingAspect {
         String name = joinPoint.getSignature().getName();
         log.info("In method " + name + " : ");
     }
-    @Around("execution(* tn.telcotec.service.classes.*.*(..))")
+    @Around("execution(* com.telcotec.service.classes.*.*(..))")
     public Object profile(ProceedingJoinPoint pjp) throws Throwable {
         long start = System.currentTimeMillis();
         Object obj = pjp.proceed();
