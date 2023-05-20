@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
-@RequestMapping("/Conventions")
+@RequestMapping("/Formules")
 
 
 public class FormulController {
@@ -24,18 +24,28 @@ public class FormulController {
 
 
     @GetMapping("/all")
-    public List<Formule> displayAllConventions(int id) {
+    public List<Formule> displayAllConventions() {
         return formulServ.AfficherToutFormules();
     }
 
-    @PostMapping("/addFormules")
+        @PostMapping("/addFormules")
     public Integer addConventions(@RequestBody Formule f) {
         return formulServ.AjouteFormules(f);
     }
-    @GetMapping("/Conventions/{idf}")
+    @GetMapping("/Formules/{idf}")
     public Formule Conventions(@PathVariable("idf") int id) {
         return formulServ.afficherForumles(id);
     }
+    @PutMapping("/updateFormules/{idc}")
+    public Formule updateConventions(@PathVariable("idc") int id , @RequestBody Formule c) {
+        return formulServ.mettreAjourFormule( id , c);
+    }
+
+    @DeleteMapping("/delete/{idc}")
+    public void delete(@PathVariable("idc") int id) {
+        formulServ. supprimerFormule( id);
+    }
+
 
 
 

@@ -1,7 +1,6 @@
 package com.telcotec.eagleye.dao.entities;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -25,12 +24,12 @@ public class Formule implements Serializable {
     private String nomFormule;
     private String descFormule;
 
-    @JsonIgnore
+
     @ManyToOne
-    KPI kpis;
+    private KPI kpis;
 
 
-    @JsonIgnore
+
     @ManyToOne
     private Compteur compteurs;
 

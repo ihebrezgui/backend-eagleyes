@@ -10,4 +10,7 @@ public interface IFormulService {
 
     public List<Formule> AfficherToutFormules();
 
+    public Formule mettreAjourFormule(int id,Formule f);
+    public void supprimerFormule(int id);
+
 }
