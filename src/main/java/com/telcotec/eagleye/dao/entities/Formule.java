@@ -29,9 +29,10 @@ public class Formule implements Serializable {
     @ManyToOne
     KPI kpis;
 
-    @OneToMany(mappedBy = "formules")
+
     @JsonIgnore
-    private List<Compteur> compteurs;
+    @ManyToOne
+    private Compteur compteurs;
 
 
 }

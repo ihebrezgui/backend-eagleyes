@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Getter
@@ -24,7 +25,7 @@ public class Compteur implements Serializable {
     private String descCompteur;
 
 
-    @ManyToOne
-    Formule formules;
+    @OneToMany
+    private List<Formule> formules;
 
 }
