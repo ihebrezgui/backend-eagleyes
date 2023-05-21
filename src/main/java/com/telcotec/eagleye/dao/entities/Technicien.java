@@ -38,7 +38,7 @@ public class Technicien implements Serializable {
     private String prenom;
     private String password;
     private String email;
-
+private String username;
 
     @OneToOne
     private User user;

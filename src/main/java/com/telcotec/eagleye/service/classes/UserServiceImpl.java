@@ -28,7 +28,7 @@ public class UserServiceImpl {
     public Technicien saveUser(Technicien e) {
         User u = new User();
         u.setEmail(e.getEmail());
-        u.setUserName(e.getPrenom());
+        u.setUserName(e.getUsername());
         u.setRole("TECHNICIEN");
         u.setPassword(bCryptPasswordEncoder.encode(e.getPassword()));
         e.setPassword(bCryptPasswordEncoder.encode(e.getPassword()));
