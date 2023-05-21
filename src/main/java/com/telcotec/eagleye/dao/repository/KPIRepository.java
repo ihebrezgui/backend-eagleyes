@@ -6,5 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface KPIRepository extends JpaRepository<KPI, Integer> {
+    KPI findByNomKPI(String nomKPI);
 
 }

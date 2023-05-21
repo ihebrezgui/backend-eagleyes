@@ -1,4 +1,5 @@
 package com.telcotec.eagleye.service.classes;
+
 import com.telcotec.eagleye.dao.entities.KPI;
 import com.telcotec.eagleye.dao.repository.KPIRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +27,16 @@ public class KPISeeder implements CommandLineRunner {
         kpi3.setNomKPI("KPI 3");
         kpi3.setDescKPI("This is the description for KPI 3");
 
-        // Save the KPIs to the database
-        kpiRepository.save(kpi1);
-        kpiRepository.save(kpi2);
-        kpiRepository.save(kpi3);
+        // Save the KPIs to the database if they don't already exist
+        saveIfNotExists(kpi1);
+        saveIfNotExists(kpi2);
+        saveIfNotExists(kpi3);
+    }
+
+    private void saveIfNotExists(KPI kpi) {
+        KPI existingKpi = kpiRepository.findByNomKPI(kpi.getNomKPI());
+        if (existingKpi == null) {
+            kpiRepository.save(kpi);
+        }
     }
 }
-

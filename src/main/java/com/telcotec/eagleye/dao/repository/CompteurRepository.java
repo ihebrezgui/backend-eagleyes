@@ -6,5 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CompteurRepository extends JpaRepository<Compteur,Integer> {
+    Compteur findByNomCompteur(String nomCompteur);
+
 
 }
