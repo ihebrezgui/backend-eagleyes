@@ -1,5 +1,7 @@
 package com.telcotec.eagleye.controller;
+import com.telcotec.eagleye.dao.entities.Compteur;
 import com.telcotec.eagleye.dao.entities.Formule;
+import com.telcotec.eagleye.service.interfaces.ICompteurService;
 import com.telcotec.eagleye.service.interfaces.IFormulService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,40 +17,12 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
-@RequestMapping("/Formules")
-
-
-public class FormuleController {
+@RequestMapping("/Compteurs")
+public class CompteurController {
     @Autowired
-    IFormulService formulServ;
-
-
-    @GetMapping("/display")
-    public List<Formule> displayAllConventions() {
-        return formulServ.AfficherToutFormules();
+    ICompteurService compteursrv;
+    @GetMapping("/displayCompteurs")
+    public List<Compteur> displayAllCompteurs() {
+        return compteursrv.AfficherToutCompteurs();
     }
-
-    @PostMapping("/addFormules")
-    public Integer addConventions(@RequestBody Formule f) {
-        return formulServ.AjouteFormules(f);
-    }
-    @GetMapping("/display/detailequipe/{idf}")
-    public Formule Conventions(@PathVariable("idf") int id) {
-        return formulServ.afficherForumles(id);
-    }
-    @PutMapping("/updateFormules/{idf}")
-    public Formule updateConventions(@PathVariable("idf") int id , @RequestBody Formule c) {
-        return formulServ.mettreAjourFormule( id , c);
-    }
-
-    @DeleteMapping("/delete/{idc}")
-    public void delete(@PathVariable("idc") int id) {
-        formulServ. supprimerFormule( id);
-    }
-
-
-
-
-
-
 }
