@@ -22,7 +22,7 @@ public class CsvFile {
     @GeneratedValue
     private Long id;
 
-    
+    private Date data;
     private String eNodeBName;
     private String cellFDDTDDIndication;
     private String cellName;
