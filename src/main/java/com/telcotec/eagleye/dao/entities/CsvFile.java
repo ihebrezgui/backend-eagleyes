@@ -2,11 +2,10 @@ package com.telcotec.eagleye.dao.entities;
 
 import lombok.*;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.sql.Date;
+import java.util.Date;
+
 
 @Entity
 @Getter
@@ -15,26 +14,27 @@ import java.sql.Date;
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
-@Table( name = "CsvFile")
+@Table( name = "csv_file")
 
 public class CsvFile {
     @Id
-    
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idCsv")
+    private Integer idCsv; // Clé primaire
     private Date date;
     private String eNodeBName;
     private String cellFDDTDDIndication;
     private String cellName;
-    
-    private String rRCConnectionSuccess;
-    private String rRCConnectionAttempt;
-    private String eRAbAbnormalRelease;
-    private String eRAbRelease;
-    private String intraFreqSuccess;
-    private String intraFreqAttempt;
-    private String cellTrafficVolume;
-    private String cellTransferTime;
-    private String avgUserNum;
+
+    private float rRCConnectionSuccess;
+    private float rRCConnectionAttempt;
+    private float eRAbAbnormalRelease;
+    private float eRAbRelease;
+    private float intraFreqSuccess;
+    private float intraFreqAttempt;
+    private float cellTrafficVolume;
+    private float cellTransferTime;
+    private float avgUserNum;
 
 
 }

@@ -2,13 +2,17 @@ package com.telcotec.eagleye.dao.helper;
 
 import com.telcotec.eagleye.dao.entities.CsvFile;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.Console;
 import java.io.InputStream;
-import java.sql.Date;
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -21,77 +25,105 @@ public class Helper {
 
     }
     public static List<CsvFile> convertExcelToListOfCSV(InputStream is) {
-        List<CsvFile> list = new ArrayList();
+        List<CsvFile> list = new ArrayList<>();
 
         try {
             XSSFWorkbook workbook = new XSSFWorkbook(is);
-            XSSFSheet sheet = workbook.getSheet("data");
+            XSSFSheet sheet = workbook.getSheet("Sheet1");
             int rowNumber = 0;
             Iterator<Row> iterator = sheet.iterator();
 
-            while(true) {
-                while(iterator.hasNext()) {
-                    Row row = (Row)iterator.next();
-                    if (rowNumber == 0) {
-                        ++rowNumber;
-                    } else {
-                        Iterator<Cell> cells = row.iterator();
-                        int cid = 0;
+            while (iterator.hasNext()) {
+                Row row = iterator.next();
+                if (rowNumber == 0) {
+                    rowNumber++;
+                } else {
+                    Iterator<Cell> cells = row.iterator();
+                    int cid = 0;
+                    CsvFile p = new CsvFile();
 
-                        CsvFile p;
-                        for(p = new CsvFile(); cells.hasNext(); ++cid) {
-                            Cell cell = (Cell)cells.next();
-                            switch (cid) {
-                                case 0:
-                                    p.setDate((Date) cell.getDateCellValue());
-                                    break;
-                                case 1:
+                    while (cells.hasNext()) {
+                        Cell cell = cells.next();
+                        switch (cid) {
+                            case 0:
+                                if (cell.getCellType() == CellType.NUMERIC) {
+                                    p.setDate(cell.getDateCellValue());
+                                }
+                                break;
+                            case 1:
+                                if (cell.getCellType() == CellType.STRING) {
                                     p.setENodeBName(cell.getStringCellValue());
-                                    break;
-                                case 2:
+                                }
+                                break;
+                            case 2:
+                                if (cell.getCellType() == CellType.STRING) {
                                     p.setCellFDDTDDIndication(cell.getStringCellValue());
-                                    break;
-                                case 3:
-                                    p.setCellName((cell.getStringCellValue()));
-                                    break;
-                                case 4:
-                                    p.setRRCConnectionSuccess((cell.getStringCellValue()));
-                                    break;
-                                case 5:
-                                    p.setERAbAbnormalRelease((cell.getStringCellValue()));
-                                    break;
-                                case 6:
-                                    p.setERAbRelease((cell.getStringCellValue()));
-                                    break;
-                                case 7:
-                                    p.setIntraFreqSuccess((cell.getStringCellValue()));
-                                    break;
-                                case 8:
-                                    p.setIntraFreqAttempt((cell.getStringCellValue()));
-                                    break;
-                                case 9:
-                                    p.setCellTrafficVolume((cell.getStringCellValue()));
-                                    break;
-
-                                case 10:
-                                    p.setCellTransferTime((cell.getStringCellValue()));
-                                    break;
-
-                                case 11:
-                                    p.setAvgUserNum((cell.getStringCellValue()));
-                                    break;   
-                            }
+                                }
+                                break;
+                            case 3:
+                                if (cell.getCellType() == CellType.STRING) {
+                                    p.setCellName(cell.getStringCellValue());
+                                }
+                                break;
+                            case 4:
+                                if (cell.getCellType() == CellType.NUMERIC) {
+                                    p.setRRCConnectionSuccess((float) cell.getNumericCellValue());
+                                }
+                                break;
+                            case 5:
+                                if (cell.getCellType() == CellType.NUMERIC) {
+                                    p.setRRCConnectionAttempt(((float) cell.getNumericCellValue()));
+                                }
+                                break;
+                                
+                            case 6:
+                                if (cell.getCellType() == CellType.NUMERIC) {
+                                    p.setERAbAbnormalRelease((float) cell.getNumericCellValue());
+                                }
+                                break;
+                            case 7:
+                                if (cell.getCellType() == CellType.NUMERIC) {
+                                    p.setERAbRelease((float) cell.getNumericCellValue());
+                                }
+                                break;
+                            case 8:
+                                if (cell.getCellType() == CellType.NUMERIC) {
+                                    p.setIntraFreqSuccess((float) cell.getNumericCellValue());
+                                }
+                                break;
+                            case 9:
+                                if (cell.getCellType() == CellType.NUMERIC) {
+                                    p.setIntraFreqAttempt((float) cell.getNumericCellValue());
+                                }
+                                break;
+                            case 10:
+                                if (cell.getCellType() == CellType.NUMERIC) {
+                                    p.setCellTrafficVolume((float) cell.getNumericCellValue());
+                                }
+                                break;
+                            case 11:
+                                if (cell.getCellType() == CellType.NUMERIC) {
+                                    p.setCellTransferTime((float) cell.getNumericCellValue());
+                                }
+                                break;
+                            case 12:
+                                if (cell.getCellType() == CellType.NUMERIC) {
+                                    p.setAvgUserNum((float) cell.getNumericCellValue());
+                                }
+                                break;
+                            default:
+                                break;
                         }
-
-                        list.add(p);
+                        cid++;
                     }
+                    list.add(p);
                 }
-
-                return list;
             }
-        } catch (Exception var11) {
-            var11.printStackTrace();
-            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
+        return list;
     }
+
 }
