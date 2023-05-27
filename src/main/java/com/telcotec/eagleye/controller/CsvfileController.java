@@ -25,7 +25,7 @@ public class CsvfileController {
     @PostMapping("/upload")
     public String uploadCsv(@RequestParam("file") MultipartFile file) {
         try {
-            List<CsvFile> csvDataList = csvService.csvToBean(file.getInputStream());
+            List<CsvFile> csvDataList = csvService.excelToBean(file);
             csvRepository.saveAll(csvDataList);
             return "CSV data saved successfully";
         } catch (IOException | ParseException e) {

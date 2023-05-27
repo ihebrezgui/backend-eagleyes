@@ -22,11 +22,11 @@ public class CsvFile {
     @GeneratedValue
     private Long id;
 
-    private Date data;
+    private Date date;
     private String eNodeBName;
     private String cellFDDTDDIndication;
     private String cellName;
-    private String localCellId;
+    
     private String rRCConnectionSuccess;
     private String rRCConnectionAttempt;
     private String eRAbAbnormalRelease;
@@ -37,6 +37,5 @@ public class CsvFile {
     private String cellTransferTime;
     private String avgUserNum;
 
-    public void setDate(java.sql.Date valueOf) {
-    }
+
 }
