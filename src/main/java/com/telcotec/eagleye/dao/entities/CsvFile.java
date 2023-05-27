@@ -3,7 +3,7 @@ package com.telcotec.eagleye.dao.entities;
 import lombok.*;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
+
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.sql.Date;
@@ -19,8 +19,7 @@ import java.sql.Date;
 
 public class CsvFile {
     @Id
-    @GeneratedValue
-    private Long id;
+    
 
     private Date date;
     private String eNodeBName;
