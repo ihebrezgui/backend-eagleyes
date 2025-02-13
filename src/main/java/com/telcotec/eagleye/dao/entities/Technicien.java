@@ -29,7 +29,7 @@ public class Technicien implements Serializable {
     private String prenom;
     private String password;
     private String email;
-private String username;
+    private String username;
 
     @OneToOne(cascade = CascadeType.REMOVE)
     private User user;
